@@ -3,8 +3,7 @@ package com.angelikabog.controller;
 import com.angelikabog.logic.ChangedPet;
 import com.angelikabog.logic.Pet;
 import com.angelikabog.logic.PetModel;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validate;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -16,6 +15,7 @@ public class Controller {
     private static final AtomicInteger newId = new AtomicInteger(1);
 
     @PostMapping(value = "/createPet", consumes = "application/json", produces = "application/text")
+    @ResponseStatus(HttpStatus.CREATED)
     public String createPet(@RequestBody Pet pet){
         petmodel.add(pet, newId.getAndIncrement());
         String result = "";
@@ -28,11 +28,13 @@ public class Controller {
     }
 
     @DeleteMapping(value = "/deletePet", consumes = "application/json")
-    public void deletePet(@RequestBody Map<String,Integer> id){
+    public String deletePet(@RequestBody Map<String,Integer> id){
         petmodel.remove(id.get("id"));
+        return "Deleted";
     }
 
     @PutMapping(value = "/updatedPet", consumes = "application/json")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public String changePet(@RequestBody ChangedPet pet){
         String result = "";
         if(petmodel.getFromList(pet.getId()) != null){
