@@ -19,9 +19,20 @@ public class PetModel implements Serializable {
     public void add(Pet pet, int id){
         model.put(id,pet);
     }
+
+    public void update(int id, String name, int age){
+        model.get(id).setName(name);
+        model.get(id).setAge(age);
+    }
+
+    public void remove(int id){
+        model.remove(id);
+    }
+
     public Pet getFromList(int id){
         return model.get(id);
     }
+
     public Map<Integer, Pet> getAll(){
         return model;
     }

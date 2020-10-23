@@ -1,11 +1,11 @@
 package com.angelikabog.controller;
 
+import com.angelikabog.logic.ChangedPet;
 import com.angelikabog.logic.Pet;
 import com.angelikabog.logic.PetModel;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Validate;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -23,6 +23,23 @@ public class Controller {
             result = String.format("Уррраа! У тебя появился первый питомец %s!", pet.getName());
         }else{
             result = String.format("Поздравляем с очередным пополнением! %s, добро пожаловать в семью!", pet.getName());
+        }
+        return result;
+    }
+
+    @DeleteMapping(value = "/deletePet", consumes = "application/json")
+    public void deletePet(@RequestBody Map<String,Integer> id){
+        petmodel.remove(id.get("id"));
+    }
+
+    @PutMapping(value = "/updatedPet", consumes = "application/json")
+    public String changePet(@RequestBody ChangedPet pet){
+        String result = "";
+        if(petmodel.getFromList(pet.getId()) != null){
+            petmodel.update(pet.getId(), pet.getName(), pet.getAge());
+            result = "updated";
+        }else{
+            result = String.format("Питомца с id = %s не найдено.", pet.getId());
         }
         return result;
     }
