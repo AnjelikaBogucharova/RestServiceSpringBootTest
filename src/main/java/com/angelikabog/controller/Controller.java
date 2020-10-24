@@ -34,7 +34,6 @@ public class Controller {
     }
 
     @PutMapping(value = "/updatedPet", consumes = "application/json")
-    @ResponseStatus(HttpStatus.ACCEPTED)
     public String changePet(@RequestBody ChangedPet pet){
         String result = "";
         if(petmodel.getFromList(pet.getId()) != null){
