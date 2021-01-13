@@ -1,5 +1,7 @@
 package com.angelikabog.logic;
 
+
+
 public class Pet {
     private String name;
     private String type;
@@ -10,6 +12,8 @@ public class Pet {
         this.type = type;
         this.age = age;
     }
+
+
 
     public Pet() {
 
@@ -38,4 +42,5 @@ public class Pet {
     public void setAge(int age) {
         this.age = age;
     }
+
 }
