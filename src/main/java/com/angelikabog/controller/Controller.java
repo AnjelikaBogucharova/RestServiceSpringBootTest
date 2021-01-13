@@ -32,12 +32,12 @@ public class Controller {
 
                     }else if(pet.getUser().equals("child") && pet.getPassword().equals("childPassword"))
                         result = new ResponseEntity("Действие не доступно!", HttpStatus.FORBIDDEN);
-                    else result = new ResponseEntity("Не вверный пароль!", HttpStatus.UNAUTHORIZED);
+                    else result = new ResponseEntity("Не верный пароль!", HttpStatus.UNAUTHORIZED);
                 }
             }
             if (countUser == 0) result = new ResponseEntity("Действие заблокировано!", HttpStatus.LOCKED);
         }catch (Exception e){
-            result = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            result = new ResponseEntity("Попытка несанкционированного доступа!",HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
 
