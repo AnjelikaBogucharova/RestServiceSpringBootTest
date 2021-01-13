@@ -32,7 +32,7 @@ public class Controller {
 
                     }else if(pet.getUser().equals("child") && pet.getPassword().equals("childPassword"))
                         result = new ResponseEntity("Действие не доступно!", HttpStatus.FORBIDDEN);
-                    else result = new ResponseEntity("Не верный пароль!", HttpStatus.UNAUTHORIZED);
+                    else result = new ResponseEntity("Неверный пароль!", HttpStatus.UNAUTHORIZED);
                 }
             }
             if (countUser == 0) result = new ResponseEntity("Действие заблокировано!", HttpStatus.LOCKED);
